@@ -5,3 +5,5 @@ Pillow
 pytesseract
 newspaper3k
 pandas
+lxml
+cssselect
