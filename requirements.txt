@@ -3,7 +3,7 @@ fpdf
 PyPDF2
 Pillow
 pytesseract
-newspaper3k
+newspaper3k==0.2.8
 pandas
 lxml
 cssselect
