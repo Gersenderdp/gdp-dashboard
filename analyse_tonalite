@@ -1,0 +1,59 @@
+# Fonction enrichie pour l'analyse de tonalité
+def analyse_tonalite(text):
+    text_lower = text.lower()
+    
+    # Listes de mots-clés pour différentes tonalités
+    aggressive_keywords = ["nulle", "honte", "pathétique", "inutile", "idiot", "stupide", "tarée", "débile", "conne", "imbécile", "ridicule"]
+    culpabilisation_keywords = ["peine", "ignore", "pourquoi", "plus de nouvelles", "si tu", "à cause de toi", "par ta faute"]
+    menace_keywords = ["verras", "sais", "passer", "bien", "attention", "gare à toi", "regarde"]
+    soutien_keywords = ["là pour", "incroyable", "fier", "bravo", "génial", "super", "formidable"]
+    seduction_keywords = ["moitié", "rien sans", "amour", "chéri", "adorable", "beau", "belle", "merveilleuse"]
+    moquerie_keywords = ["pauvre", "pitoyable", "misérable", "ridicule", "haha", "lol", "c’est ça"]
+    
+    # Modificateurs d'intensité
+    intensite_eleve = ["très", "vraiment", "toujours", "jamais", "tellement", "complètement", "totalement", "absolument"]
+    intensite_subtile = ["un peu", "légèrement", "peut-être", "à peine"]
+    
+    # Détection de l'intensité
+    intensite = "Modérée"
+    for mot in intensite_eleve:
+        if mot in text_lower:
+            intensite = "Élevée"
+            break
+    for mot in intensite_subtile:
+        if mot in text_lower:
+            intensite = "Subtile"
+            break
+    
+    # Détection des tonalités
+    tonalite_principale = None
+    tonalite_secondaire = None
+    
+    # Vérification des tonalités principales
+    if any(keyword in text_lower for keyword in aggressive_keywords):
+        tonalite_principale = "Agressive"
+    elif any(keyword in text_lower for keyword in culpabilisation_keywords):
+        tonalite_principale = "Culpabilisante"
+    elif any(keyword in text_lower for keyword in menace_keywords):
+        tonalite_principale = "Menaçante"
+    elif any(keyword in text_lower for keyword in soutien_keywords):
+        tonalite_principale = "Soutenante"
+    elif any(keyword in text_lower for keyword in seduction_keywords):
+        tonalite_principale = "Seductrice"
+    else:
+        tonalite_principale = "Neutre"
+    
+    # Vérification de la tonalité secondaire (Moquerie)
+    if any(keyword in text_lower for keyword in moquerie_keywords):
+        if tonalite_principale != "Neutre":
+            tonalite_secondaire = "Moqueuse"
+        else:
+            tonalite_principale = "Moqueuse"
+    
+    # Construction de la tonalité finale
+    if tonalite_principale == "Neutre":
+        return "Neutre"
+    elif tonalite_secondaire:
+        return f"{tonalite_principale} et {tonalite_secondaire} ({intensite})"
+    else:
+        return f"{tonalite_principale} ({intensite})"

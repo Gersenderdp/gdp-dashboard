@@ -1,19 +1,13 @@
-# :earth_americas: GDP dashboard template
+## Instructions de Configuration
 
-A simple Streamlit app showing the GDP of different countries in the world.
+### Prérequis
+- Python 3.8 ou supérieur
+- Codespaces ou un environnement local avec `pip` installé
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://gdp-dashboard-template.streamlit.app/)
+### Étapes d'Installation
 
-### How to run it on your own machine
-
-1. Install the requirements
-
-   ```
-   $ pip install -r requirements.txt
-   ```
-
-2. Run the app
-
-   ```
-   $ streamlit run streamlit_app.py
+1. **Cloner le dépôt** :
+   ```bash
+   git clone <URL-du-dépôt>
+   cd GDP-DASHBOARD
    ```

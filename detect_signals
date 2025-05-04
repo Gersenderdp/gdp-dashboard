@@ -1,0 +1,81 @@
+# Lexique comportemental enrichi avec les mots-clés de analyse_tonalite
+LEXICON = {
+    "culpabilisation": {
+        "description": "Fait peser subtilement la faute sur l’autre, en se victimisant.",
+        "formulations": ["tu me fais de la peine", "pourquoi tu m'ignores", "plus de nouvelles", "à cause de toi", "par ta faute"],
+        "keywords": ["peine", "ignore", "pourquoi", "plus de nouvelles", "si tu", "à cause de toi", "par ta faute"],
+        "effet": "Doute sur soi, repli affectif",
+        "juridique": "Art. 222-33-2-2 (harcèlement moral)"
+    },
+    "dévalorisation": {
+        "description": "Rabaissement psychologique.",
+        "formulations": ["tu ne vaux rien", "tu me fais honte", "tu es folle", "je suis folle", "elle est folle", "il est fou"],
+        "keywords": ["nulle", "honte", "pathétique", "inutile", "idiot", "stupide", "tarée", "débile", "conne", "imbécile", "ridicule"],
+        "effet": "Perte de confiance, repli",
+        "juridique": "Art. 222-33-2-2 (harcèlement moral)"
+    },
+    "double contrainte": {
+        "description": "Injonctions contradictoires.",
+        "formulations": ["fais ça mais pas comme ça", "tu dois mais tu ne peux pas"],
+        "keywords": ["fais ça", "tu dois", "tu ne peux pas"],
+        "effet": "Confusion, blocage",
+        "juridique": "Stratégie coercitive"
+    },
+    "isolement": {
+        "description": "Tentative de couper les liens.",
+        "formulations": ["ne parle à personne", "tu n’as besoin de personne"],
+        "keywords": ["ne parle", "besoin de personne"],
+        "effet": "Dépendance, isolement social",
+        "juridique": "Stratégie coercitive"
+    },
+    "menace implicite": {
+        "description": "Provoque la peur ou l’angoisse sans menace directe.",
+        "formulations": ["tu verras bien", "tu sais ce qu’il va se passer"],
+        "keywords": ["verras", "sais", "passer", "bien", "attention", "gare à toi", "regarde"],
+        "effet": "Peur intériorisée, blocage",
+        "juridique": "Harcèlement / pression psychologique"
+    },
+    "dénégation de réalité": {
+        "description": "Nie ce que l’autre vit ou ressent comme vrai.",
+        "formulations": ["tu inventes encore", "tu dramatises tout", "tu es folle", "je suis folle", "elle est folle", "il est fou"],
+        "keywords": ["inventes", "dramatises", "folle", "fou"],
+        "effet": "Gaslighting, perte de repères",
+        "juridique": "Altération du discernement"
+    },
+    "moquerie": {
+        "description": "Ton sarcastique ou de dérision.",
+        "formulations": ["pauvre", "pitoyable", "misérable", "ridicule", "haha", "lol", "c’est ça"],
+        "keywords": ["pauvre", "pitoyable", "misérable", "ridicule", "haha", "lol", "c’est ça"],
+        "effet": "Humiliation, perte de confiance",
+        "juridique": "Art. 222-33-2-2 (harcèlement moral)"
+    }
+}
+
+# Fonction pour analyser un message et détecter les signaux faibles
+def detect_signals(message):
+    signals = []
+    message_lower = message.lower()
+    for signal, details in LEXICON.items():
+        # Recherche des mots-clés individuels
+        for keyword in details["keywords"]:
+            if keyword in message_lower:
+                signals.append({
+                    "signal": signal,
+                    "description": details["description"],
+                    "formulation": keyword,  # On utilise le mot-clé détecté comme formulation
+                    "effet": details["effet"],
+                    "juridique": details["juridique"]
+                })
+                break  # Évite de dupliquer si plusieurs mots-clés de la même catégorie sont détectés
+        # Recherche de correspondance exacte pour les formulations (pour maintenir la compatibilité)
+        for formulation in details["formulations"]:
+            if formulation in message_lower:
+                signals.append({
+                    "signal": signal,
+                    "description": details["description"],
+                    "formulation": formulation,
+                    "effet": details["effet"],
+                    "juridique": details["juridique"]
+                })
+                break
+    return signals

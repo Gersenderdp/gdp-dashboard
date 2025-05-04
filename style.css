@@ -1,0 +1,40 @@
+/* Style général */
+body {
+    background-color: #1E2A38; /* Bleu nuit */
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Titres */
+h1, h2, h3 {
+    color: white;
+    font-weight: 600;
+}
+
+/* Zone de texte */
+.stTextArea textarea {
+    background-color: #2e3b4e;
+    color: #ffffff;
+    border: 1px solid #B0BEC5;
+}
+
+/* Boutons */
+.stButton button {
+    background-color: #C62828; /* Rouge profond */
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 0.5em 1em;
+}
+
+/* Encarts success/info/warning */
+.stAlert {
+    border-radius: 8px;
+}
+
+/* Zones upload */
+.css-1n76uvr {
+    background-color: #2e3b4e;
+    border: 2px dashed #B0BEC5;
+    color: #ffffff;
+}
